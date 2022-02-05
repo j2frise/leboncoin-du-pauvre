@@ -54,63 +54,61 @@
             <!--end container-->
         </div>
         <!--============ End Secondary Navigation ===========================================================-->
-        <!--============ Page Title =========================================================================-->
-        <div class="page-title">
-            <div class="container">
-                <h1 class="opacity-40 center">
-                    <a href="#">Leboncoin</a>, du pauvre
-                </h1>
-            </div>
-            <!--end container-->
-        </div>
-        <!--============ End Page Title =====================================================================-->
-        <!--============ Hero Form ==========================================================================-->
-        <form class="hero-form form">
-            <div class="container">
-                <!--Main Form-->
-                <div class="main-search-form">
-                    <div class="form-row">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-group">
-                                <label for="what" class="col-form-label">Mot-clé</label>
-                                <input name="keyword" type="text" class="form-control" id="what" placeholder="Que cherchez-vous ?">
-                            </div>
-                            <!--end form-group-->
-                        </div>
-                        <div class="col-md-3 col-sm-3">
-                            <div class="form-group">
-                                <label for="category" class="col-form-label">Catégorie</label>
-                                <select name="category" id="category" data-placeholder="Select Category">
-                                    <option value="">Selectionnez une Catégorie</option>
-                                    <option value="1">Computers</option>
-                                    <option value="2">Real Estate</option>
-                                    <option value="3">Cars & Motorcycles</option>
-                                    <option value="4">Furniture</option>
-                                    <option value="5">Pets & Animals</option>
-                                </select>
-                            </div>
-                            <!--end form-group-->
-                        </div>
-                        <!--end col-md-3-->
-                        <div class="col-md-3 col-sm-3">
-                            <button type="submit" class="btn btn-primary width-100">Recherche</button>
-                        </div>
-                        <!--end col-md-3-->
-                    </div>
-                    <!--end form-row-->
+
+        {% if app.request.get('_route') == 'homepage' %}
+            <div class="page-title">
+                <div class="container">
+                    <h1 class="opacity-40 center">
+                        <a href="#">Leboncoin</a>, du pauvre
+                    </h1>
                 </div>
-                <!--end main-search-form-->
+                <!--end container-->
             </div>
-            <!--end container-->
-        </form>
-        <!--============ End Hero Form ======================================================================-->
-        <div class="background">
-            <div class="background-image original-size">
-                <img src="{{ asset('img/footer-background-icons.jpg') }}" alt="">
+        
+            {% include('components/form-search.html.twig') %}
+
+            <div class="background">
+                <div class="background-image original-size">
+                    <img src="{{ asset('img/footer-background-icons.jpg') }}" alt="">
+                </div>
+                <!--end background-image-->
             </div>
-            <!--end background-image-->
-        </div>
-        <!--end background-->
+        {% else %}
+                 <div class="main-navigation">
+                    <div class="container">
+                        <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+                            <!--end navbar-collapse-->
+                            <a href="#collapseMainSearchForm" class="main-search-form-toggle" data-toggle="collapse"  aria-expanded="false" aria-controls="collapseMainSearchForm">
+                                <i class="fa fa-search"></i>
+                                <i class="fa fa-close"></i>
+                            </a>
+                            <!--end main-search-form-toggle-->
+                        </nav>
+                        <!--end navbar-->
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('homepage') }}">Retour à l'accueil</a></li>
+                        </ol>
+                        <!--end breadcrumb-->
+                    </div>
+                    <!--end container-->
+                </div>
+
+                <div class="collapse" id="collapseMainSearchForm">
+                    {% include('components/form-search.html.twig') %}
+                </div>
+                <!--end collapse-->
+
+                <div class="page-title">
+                    <div class="container">
+                        <h1>Se connexion</h1>
+                    </div>
+                    <!--end container-->
+                </div>
+
+                <div class="background"></div>
+                <!--end background-->
+        {% endif %}
+
     </div>
     <!--end hero-wrapper-->
 </header>

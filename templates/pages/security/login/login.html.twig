@@ -1,24 +1,19 @@
 {% extends 'pages/layout-page.html.twig' %}
 
 {% block security %}
-    <div class="security-container">
-        <div class="login">
-            <h1 class="title is-3">{{ 'login.login'|trans }}</h1>
-            <div class="border-form">
-                {% include('blog/security/login/_login_form.html.twig') %}
-                <div class="login-subtitle">
-                    <div class="mb-10">
-                        {{ 'login.login_with'|trans }} :
-                        <a href="{{ path('login_github') }}">
-                            <i class="fa fa-github fa-2x" aria-hidden="true"></i>
-                        </a>
-                    </div>
-
-                    <a href="{{ path('password_reset_request') }}">{{ 'login.forgot_password'|trans }}</a><br/>
-                    {{ 'login.not_registered'|trans }}
-                    <a href="{{ path('registration') }}">{{ 'login.create_account'|trans }}</a>
-                </div>
-            </div>
+     <div class="row justify-content-center">
+        <div class="col-md-4">
+            {% include('pages/security/login/_login_form.html.twig') %}
+            <hr>
+            <p>
+                <a href="{{ path('password_reset_request') }}" class="link">{{ 'login.forgot_password'|trans }}</a>
+            </p>
+            <p>
+                Vous n'avez pas de compte ? <a href="{{ path('registration') }}" class="link">cliquez ici.</a>
+            </p>
         </div>
+        <!--end col-md-6-->
     </div>
+    <!--end row-->
+
 {% endblock %}

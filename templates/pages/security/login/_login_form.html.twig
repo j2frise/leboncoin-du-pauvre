@@ -1,33 +1,24 @@
-{{ form_start(form, {'attr': {'id': 'login-form'}}) }}
+{{ form_start(form, {'attr': {'id': 'login-form', 'class':'form clearfix'}}) }}
     {{ form_errors(form) }}
 
-    <div class="field">
-        {{ form_label(form.username, 'login.form.username'|trans, {'label_attr': {'class': 'label has-text-left'}}) }}
-        <div class="control has-icons-left">
-            {{ form_widget(form.username, {'value': lastUserName, 'attr': {'class': 'input'}}) }}
-            <span class="icon is-small is-left">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            </span>
-        </div>
-    </div>
-
-    <div class="field">
-        {{ form_label(form.password, 'login.form.password'|trans, {'label_attr': {'class': 'label has-text-left'}}) }}
-        <div class="control has-icons-left">
-            {{ form_widget(form.password, {'attr': {'class': 'input'}}) }}
-            <span class="icon is-small is-left">
-                <i class="fa fa-lock" aria-hidden="true"></i>
-            </span>
-        </div>
-    </div>
-
     {% if (error) %}
-        <div class="login-message">
-            {{ error.messageKey|trans(error.messageData, 'messages') }}
+        <div class="form-group">
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'messages') }}</div>
         </div>
     {% endif %}
 
-    <button type="submit" class="button is-primary" data-trans="{{ 'login.form.submitted'|trans }}">
-        {{ 'login.login'|trans }}
-    </button>
+     <div class="form-group">
+        {{ form_label(form.username, 'login.form.username'|trans, {'label_attr': {'class': 'col-form-label required'}}) }}
+        {{ form_widget(form.username, {'value': lastUserName, 'attr': {'class': 'form-control', 'placeholder': 'Ton identifiant'}}) }}
+    </div>
+    <!--end form-group-->
+    <div class="form-group">
+        {{ form_label(form.password, 'login.form.password'|trans, {'label_attr': {'class': 'col-form-label required'}}) }}
+        {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
+    </div>
+    <!--end form-group-->
+    <div class="d-flex justify-content-between align-items-baseline mt-4">
+        <button type="submit" class="btn btn-primary col" data-trans="{{ 'login.form.submitted'|trans }}">{{ 'login.login'|trans }}</button>
+    </div>
+
 {{ form_end(form) }}
