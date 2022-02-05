@@ -5,20 +5,38 @@
         <title>{% block title %}leboncoin-dupauvre{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('fonts/font-awesome.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/selectize.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {% endblock %}
     </head>
-    <body class="bg-grey is-flex flex-co min-h-screen">
-    {% block wrapper %}
-        {% include 'navbar/navbar.html.twig' %}
-        {% include 'notification-translations/message.html.twig' %}
-    {% endblock %}
+    <body>
+        <div class="page {{ (app.request.get('_route') == 'homepage' ? 'home-page"' : 'sub-page') }}">
+        {% block wrapper %}
+            {% include 'navbar/navbar.html.twig' %}
+            {% include 'notification-translations/message.html.twig' %}
+        {% endblock %}
+        </div>
     </body>
     {% block javascripts %}
-        <script src="{{ asset('build/manifest.js') }}"></script>
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('js/popper.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/selectize.min.js') }}"></script>
+        <script src="{{ asset('js/masonry.pkgd.min.js') }}"></script>
+        <script src="{{ asset('js/icheck.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="{{ asset('js/delete-notification.js') }}"></script>
+        <script src="{{ asset('js/button-click-back.js') }}"></script>
+        <script src="{{ asset('js/class/BellNotification.js') }}"></script>
+
         {% if is_granted('ROLE_USER') %}
-        <script src="{{ asset('build/js/mercure-subscribe.js') }}"></script>
+            <script src="{{ asset('js/class/mercure-subscribe.js') }}"></script>
         {% endif %}
-        <script src="{{ asset('build/js/app.js') }}"></script>
+         <script>
+            new BellNotification($('#bell'))
+        </script>
     {% endblock %}
 </html>

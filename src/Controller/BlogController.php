@@ -26,7 +26,7 @@ class BlogController extends AbstractController
         $articles = $paginator->getItemList($articleRepository, $page);
         $nbPages = $paginator->countPage($articles);
 
-        return $this->render('blog/home/index.html.twig', [
+        return $this->render('pages/home/index.html.twig', [
             'articles' => $articles,
             'nbPages' => $nbPages,
             'page' => $page,

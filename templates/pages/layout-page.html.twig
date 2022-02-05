@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block wrapper %}
+    {{ parent() }}
+    <section class="content">
+        <section class="block">
+            <div class="container">
+                {% block flashmessage %}
+                    {% include 'flashMessage/flashMessage.html.twig' %}
+                {% endblock %}
+
+                {% block body %}{% endblock %}
+
+                {% block security %}{% endblock %}
+            </div>
+        </section>
+    </section>
+
+    {% block footer %}
+        <footer class="footer">
+            <div class="wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12"><h2>Contact</h2></div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <figure>
+                                        27 bis, rue du Progrès<br>
+                                        93100, Montreuil
+                                    </figure>
+                                </div>
+                                <div class="col-md-2">
+                                    <strong>Email:</strong> <a href="#">hello@example.com</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <strong>Linkedin: </strong> <br/>
+
+                                </div>
+                                 <div class="col-md-2">
+                                    <a href="#" class="btn btn-primary text-caps btn-framed">Nous contacter</a>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row-->
+                </div>
+                <div class="background">
+                    <div class="background-image original-size">
+                        <img src="{{ asset('img/footer-background-icons.jpg') }}" alt="">
+                    </div>
+                    <!--end background-image-->
+                </div>
+                <!--end background-->
+            </div>
+        </footer>
+    {% endblock %}
+
+{% endblock %}

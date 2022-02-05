@@ -1,62 +1,116 @@
-<nav class="navbar {{ (app.request.requestUri matches '/admin/' ? 'is-fixed-top' : '') }}"
-     role="navigation" aria-label="main navigation">
-    <div class="container">
-
-        <div class="navbar-brand">
-            <a href="{{ path('homepage') }}" class="navbar-item">Training leboncoin-dupauvre</a>
-
-            <div class="button navbar-burger burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-
-        <div class="navbar-menu">
-            {% if is_granted('ROLE_ADMIN') %}
-                <div class="navbar-start">
-                    <a href="{{ path('admin-dashboard') }}" class="navbar-item">
-                        {{ 'navbar.dashboard'|trans }}
-                    </a>
-                </div>
-            {% endif %}
-            <div class="navbar-end">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-                    {% include 'navbar/bell-notification.html.twig' %}
-
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            {{ app.user.username }}
+ <header class="hero">
+    <div class="hero-wrapper">
+        <!--============ Secondary Navigation ===============================================================-->
+        <div class="secondary-navigation">
+            <div class="container">
+                <a class="left" href="{{ path('homepage') }}">
+                    <span>
+                        <i class="fa fa-home"></i> Accueil
+                    </span>
+                </a>  
+                <!--end left-->
+                <ul class="right">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li>
+                            <a href="{{ path('user_profile') }}">
+                                <i class="fa fa-user"></i> {{ app.user.username }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="my-ads.html">
+                                <i class="fa fa-heart"></i>Mes favoris
+                            </a>
+                        </li>
+                         <li>
+                            <a href="{{ path('logout') }}">
+                                <i class="fa fa-sign-out"></i>  {{ 'navbar.logout'|trans }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('login') }}">
+                                <i class="fa fa-sign-in"></i> {{ 'navbar.login'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('registration') }}">
+                                <i class="fa fa-pencil-square-o"></i> {{ 'navbar.signin'|trans }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ app.request.locale|upper }}
                         </a>
-                        <div class="navbar-dropdown is-right">
-                            <a class="navbar-item" href="{{ path('user_profile') }}">
-                                {{ 'navbar.profile'|trans }}
-                            </a>
-                            <a class="navbar-item" href="{{ path('logout') }}">
-                                {{ 'navbar.logout'|trans }}
-                            </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ path('switch_locale', {'locale': 'fr'}) }}">FR</a>
+                            <a class="dropdown-item" href="{{ path('switch_locale', {'locale': 'en'}) }}">EN</a>
                         </div>
-                    </div>
-                {% else %}
-                    <a href="{{ path('login') }}" class="navbar-item navbar-action bold">
-                        {{ 'navbar.login'|trans }}
-                    </a>
-                    <p class="navbar-item navbar-action">{{ 'generic.or'|trans }}</p>
-                    <a href="{{ path('registration') }}" class="navbar-item navbar-action bold">
-                        {{ 'navbar.signin'|trans }}
-                    </a>
-                {% endif %}
+                    </li>
 
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">{{ app.request.locale|upper }}</a>
-
-                    <div class="navbar-dropdown">
-                        <a href="{{ path('switch_locale', {'locale': 'fr'}) }}" class="navbar-item">FR</a>
-                        <a href="{{ path('switch_locale', {'locale': 'en'}) }}" class="navbar-item">EN</a>
-                    </div>
-                </div>
+                </ul>
+                <!--end right-->
             </div>
+            <!--end container-->
         </div>
+        <!--============ End Secondary Navigation ===========================================================-->
+        <!--============ Page Title =========================================================================-->
+        <div class="page-title">
+            <div class="container">
+                <h1 class="opacity-40 center">
+                    <a href="#">Leboncoin</a>, du pauvre
+                </h1>
+            </div>
+            <!--end container-->
+        </div>
+        <!--============ End Page Title =====================================================================-->
+        <!--============ Hero Form ==========================================================================-->
+        <form class="hero-form form">
+            <div class="container">
+                <!--Main Form-->
+                <div class="main-search-form">
+                    <div class="form-row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label for="what" class="col-form-label">Mot-clé</label>
+                                <input name="keyword" type="text" class="form-control" id="what" placeholder="Que cherchez-vous ?">
+                            </div>
+                            <!--end form-group-->
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                                <label for="category" class="col-form-label">Catégorie</label>
+                                <select name="category" id="category" data-placeholder="Select Category">
+                                    <option value="">Selectionnez une Catégorie</option>
+                                    <option value="1">Computers</option>
+                                    <option value="2">Real Estate</option>
+                                    <option value="3">Cars & Motorcycles</option>
+                                    <option value="4">Furniture</option>
+                                    <option value="5">Pets & Animals</option>
+                                </select>
+                            </div>
+                            <!--end form-group-->
+                        </div>
+                        <!--end col-md-3-->
+                        <div class="col-md-3 col-sm-3">
+                            <button type="submit" class="btn btn-primary width-100">Recherche</button>
+                        </div>
+                        <!--end col-md-3-->
+                    </div>
+                    <!--end form-row-->
+                </div>
+                <!--end main-search-form-->
+            </div>
+            <!--end container-->
+        </form>
+        <!--============ End Hero Form ======================================================================-->
+        <div class="background">
+            <div class="background-image original-size">
+                <img src="{{ asset('img/footer-background-icons.jpg') }}" alt="">
+            </div>
+            <!--end background-image-->
+        </div>
+        <!--end background-->
     </div>
-</nav>
+    <!--end hero-wrapper-->
+</header>

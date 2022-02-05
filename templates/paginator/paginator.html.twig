@@ -4,32 +4,33 @@
 {% set hellipMax = 0 %}
 {% set arrayPages = range(1, nbPages) %}
 
-<div class="pagination-container">
-    <nav class="pagination" role="navigation" aria-label="pagination">
-        <nav class="pagination" role="navigation" aria-label="pagination">
-            <ul class="pagination-list">
-                {% for p in arrayPages %}
-                    {% if p > minLimit and p < maxLimit or p == min(arrayPages) or p == min(arrayPages) + 1 or p == max(arrayPages) or p == max(arrayPages) - 1 %}
-                        <li>
-                            <a href="{{ path(app.request.get('_route'), {'page': p}) }}"
-                               class="pagination-link {{ (p == page ? 'is-current') }}"
-                               aria-label="Goto page {{ p }}">{{ p }}</a>
-                        </li>
-                    {% else %}
-                        {% if hellipMin != 1 and minLimit > min(arrayPages) and minLimit > min(arrayPages) + 1 %}
-                            <li>
-                                <span class="pagination-ellipsis">&hellip;</span>
-                            </li>
-                            {% set hellipMin = 1 %}
-                        {% elseif hellipMax != 1 and maxLimit < max(arrayPages) and maxLimit < max(arrayPages) - 1 %}
-                            <li>
-                                <span class="pagination-ellipsis">&hellip;</span>
-                            </li>
-                            {% set hellipMax = 1 %}
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </nav>
-    </nav>
-</div>
+<nav aria-label="..." class="mt-5">
+  <ul class="pagination m-auto">
+    {% for p in arrayPages %}
+        {% if p > minLimit and p < maxLimit or p == min(arrayPages) or p == min(arrayPages) + 1 or p == max(arrayPages) or p == max(arrayPages) - 1 %}
+            {% if p == page %}
+                <li class="page-item active">
+                    <span class="page-link">
+                        {{ p }}
+                        <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="{{ path(app.request.get('_route'), {'page': p}) }}" aria-label="Goto page {{ p }}">{{ p }}</a></li>
+            {% endif %}
+        {% else %}
+            {% if hellipMin != 1 and minLimit > min(arrayPages) and minLimit > min(arrayPages) + 1 %}
+                <li class="page-item">
+                    <span class="page-link">&hellip;</span>
+                </li>
+                {% set hellipMin = 1 %}
+            {% elseif hellipMax != 1 and maxLimit < max(arrayPages) and maxLimit < max(arrayPages) - 1 %}
+                <li class="page-item">
+                    <span class="page-link">&hellip;</span>
+                </li>
+                {% set hellipMax = 1 %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+  </ul>
+</nav>

@@ -1,0 +1,51 @@
+{% extends 'pages/layout-page.html.twig' %}
+
+{% block body %}
+    <div class="section-title clearfix">
+        <div class="float-xl-left float-md-left float-sm-none">
+            <h2>Recentes publications</h2>
+        </div>
+    </div>
+    {% if articles is not empty %}
+        <div class="items masonry grid-xl-4-items grid-lg-3-items grid-md-2-items">
+        {% for article in articles %}
+            <div class="item">
+                <div class="wrapper">
+                    <div class="image">
+                        <h3>
+                            <a href="#" class="tag category">Adventure</a>
+                            <a href="{{ path('article_show', {'slug': article.slug}) }}" class="title">{{ article.title|truncate(40) }}</a>
+=                        </h3>
+                        <a href="{{ path('article_show', {'slug': article.slug}) }}" class="image-wrapper background-image">
+                            <img src="{{ asset('img/image-03.jpg') }}" alt="" />
+                        </a>
+                    </div>
+                    <!--end image-->
+                    <div class="price">$1,560</div>
+                    <div class="meta">
+                        <figure>
+                            <i class="fa fa-calendar-o"></i> <time datetime="2016-1-1">{{ article.createAt|date("d/m/Y") }}</time>
+                        </figure>
+                        <figure>
+                            <a href="#">
+                                <i class="fa fa-user"></i> {{ 'generic.by'|trans }} {{ article.author.username }}
+                            </a>
+                        </figure>
+                    </div>
+                    <!--end meta-->
+                    <div class="description">
+                        <p>{{ article.content|truncate(100) }}</p>
+                    </div>
+                    <!--end description-->
+                    <a href="{{ path('article_show', {'slug': article.slug}) }}" class="detail text-caps underline">{{ 'home.read_more'|trans }}</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        {% include 'paginator/paginator.html.twig' %}
+    {% else %}
+        <div class="has-text-centered">
+            <h1 class="title is-4">{{ 'home.no_article'|trans }}</h1>
+        </div>
+    {% endif %}
+{% endblock %}

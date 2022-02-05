@@ -16,7 +16,7 @@ class UserSettingsController extends AbstractController
      */
     public function show(): Response
     {
-        return $this->render('blog/user/profile/show.html.twig', [
+        return $this->render('pages/user/profile/show.html.twig', [
             'user' => $this->getUser(),
         ]);
     }
