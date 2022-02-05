@@ -1,10 +1,11 @@
 # leboncoin-du-pauvre
 Projet scolaire symfony
 
-# commandes
+# commandes d'installation avec Docker, composer, et symfony
 docker-compose run --rm --no-deps app-server composer install
 
 docker run --rm -it -v $(pwd):/application -w /application node yarn install
+
 docker run --rm -it -v $(pwd):/application -w /application node yarn encore dev
 
 docker-compose up --build
